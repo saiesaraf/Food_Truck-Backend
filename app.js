@@ -18,9 +18,6 @@ app.use(bodyParser.urlencoded( {extended: false}));
 //mongoose to use
 const mongoose = require('mongoose');
 const Menu = require('./models/menu');
-
-
-
 //connecting to the database
 mongoose.connect(
   "mongodb://localhost:27017/Taco_Loco",{ useNewUrlParser: true }
@@ -28,27 +25,7 @@ mongoose.connect(
 .then(() => {
   console.log("Connected to database!");
   
-//Creating the existing collections in database called Tabo_Loco
-/*Menu.create(
-  {
-    name:"veggie taco",
-    cost:2.30
-  }
-);
 
-Menu.create(
-  {
-    name:"Beef Taco",
-    cost:3.00
-  }
-);
-
-Menu.create(
-  {
-    name:"Chorizo Taco",
-    cost:3.50
-  }
-);*/
 })
 .catch((err) => {
   console.log(err);
