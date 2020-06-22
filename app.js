@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded( {extended: false}));
 const mongoose = require('mongoose');
 const Menu = require('./models/menu');
 //connecting to the database
-mongoose.connect(
+/*mongoose.connect(
   "mongodb://localhost:27017/Taco_Loco",{ useNewUrlParser: true }
 )
 .then(() => {
@@ -37,13 +37,13 @@ mongoose.connect(
 })
 .catch((err) => {
   console.log(err);
-});
+});*/
 
 //connecting to MongoAtlas DB
-/*mongoose.connect('mongodb+srv://saiesaraf:March2019@cluster0-5czsu.mongodb.net/<dbname>?retryWrites=true&w=majority',{
+mongoose.connect('mongodb+srv://saiesaraf:March2019@cluster0-5czsu.mongodb.net/<dbname>?retryWrites=true&w=majority',{
     useNewUrlParser:true,
     useCreateIndex:true
-});*/
+});
 
 
 //First endpoint- Take input from the user- menu name and quantity
