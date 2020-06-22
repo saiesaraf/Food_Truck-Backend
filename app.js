@@ -12,7 +12,17 @@ var menuRouter = require('./routes/menuRouter');
 var app = express();
 app.use(cors());
 app.options('*', cors());
-
+var originsWhitelist = [
+  'http://localhost:4200'
+  ];
+  var corsOptions = {
+  origin: function(origin, callback){
+  var isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
+  callback(null, isWhitelisted);
+  },
+  credentials:true
+  }
+  app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded( {extended: false}));
 //mongoose to use
@@ -68,5 +78,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;

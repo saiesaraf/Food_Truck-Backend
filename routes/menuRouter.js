@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const Menu = require("../models/menu");
-
+const stripe = require('stripe')('sk_test_ZPa6gHueecYMJylPMeZKBGSK00f6AtwfDp');
 /* GET users listing. */
 router.get("/", function(req, res, next) {
   var total_menu = [];
@@ -10,7 +10,9 @@ router.get("/", function(req, res, next) {
       allmenu.forEach(function(item) {
         const menu_obj = {
           name: item.name,
-          cost: item.cost
+          cost: item.cost,
+          description: item.description,
+          image: item.image
         };
         total_menu.push(menu_obj);
       });
@@ -60,19 +62,39 @@ router.post("/post_order", async function(req, res, next) {
 router.post("/menu_name", async function(req, res, next) {
   const menu = new Menu({
     name: req.body.name,
-    cost: req.body.cost
+    cost: req.body.cost,
+    description: req.body.description,
+    image: req.body.image
   });
+  console.log('op==',menu);
   menu
     .save()
     .then(createdmenu => {
       console.log(createdmenu);
-      res.status(201).json({
-        message: "New menu is added successfully"
-      });
+      res.json({success:true})
     })
     .catch(err => {
       console.log(err);
+      res.json({success:false,msg:err});
     });
 });
+
+router.post("/payme",(req,res)=>{
+  console.log('The body is ',req.body);
+  var charge = stripe.charges.create({
+      amount: req.body.amount,
+      currency: 'usd',
+      source: req.body.token
+    },(err,charge)=>{
+        if(err){
+           console.log(err);
+           res.json({success:false,msg:err});
+        }
+        res.json({
+            success : true,
+            message : "Payment Done"
+        })
+    });
+})
 
 module.exports = router;
