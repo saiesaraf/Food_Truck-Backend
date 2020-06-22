@@ -44,7 +44,6 @@ const Menu = require('./models/menu');
 mongoose.connect('mongodb+srv://saiesaraf:April@2020@cluster0-5czsu.mongodb.net/Taco_Loco?retryWrites=true&w=majority',{
     useNewUrlParser:true,
     useCreateIndex:true
-    
 });
 
 
@@ -69,6 +68,9 @@ app.use('/users', usersRouter);
 app.use('/menuNew', menuRouter);
 
 
+app.listen(process.env.PORT || 5000)
+
+console.log('listening to port' + process.env.PORT)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
