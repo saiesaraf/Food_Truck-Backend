@@ -34,12 +34,16 @@ mongoose.connect(
 )
 .then(() => {
   console.log("Connected to database!");
-  
-
 })
 .catch((err) => {
   console.log(err);
 });
+
+//connecting to MongoAtlas DB
+/*mongoose.connect('mongodb+srv://saiesaraf:March2019@cluster0-5czsu.mongodb.net/<dbname>?retryWrites=true&w=majority',{
+    useNewUrlParser:true,
+    useCreateIndex:true
+});*/
 
 
 //First endpoint- Take input from the user- menu name and quantity
