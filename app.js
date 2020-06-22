@@ -44,6 +44,7 @@ const Menu = require('./models/menu');
 mongoose.connect('mongodb+srv://saiesaraf:April@2020@cluster0-5czsu.mongodb.net/Taco_Loco?retryWrites=true&w=majority',{
     useNewUrlParser:true,
     useCreateIndex:true
+    
 });
 
 
