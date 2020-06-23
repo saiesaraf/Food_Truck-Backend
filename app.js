@@ -13,7 +13,8 @@ var app = express();
 app.use(cors());
 app.options('*', cors());
 var originsWhitelist = [
-  'http://localhost:4200'
+  'http://localhost:4200',
+  'https://enigmatic-journey-95823.herokuapp.com'
   ];
   var corsOptions = {
   origin: function(origin, callback){
