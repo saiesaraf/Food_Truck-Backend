@@ -81,8 +81,10 @@ router.post("/menu_name", async function(req, res, next) {
 
 router.post("/payme",(req,res)=>{
   console.log('The body is ',req.body);
+  var num = req.body.amount *100;
+  console.log("num is " + num);
   var charge = stripe.charges.create({
-      amount: req.body.amount,
+      amount: num,
       currency: 'usd',
       source: req.body.token
     },(err,charge)=>{

@@ -4,9 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../config/keys");
 const passport = require("passport");
-
 const User = require("../models/userData");
-
 const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
 
@@ -118,6 +116,7 @@ router.post("/login", async function(req, res, next) {
     })
 });
 
+/*Userdetails*/
 router.get("/userdetails/:id",async function(req,res,next)
 {
   await User.findOne({ email: req.params.id}).then(user => {
@@ -137,5 +136,7 @@ router.get("/userdetails/:id",async function(req,res,next)
         }
       });
 });
+
+
 
 module.exports = router;

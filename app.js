@@ -9,6 +9,8 @@ const cors = require("cors");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var menuRouter = require('./routes/menuRouter');
+var orderRouter = require('./routes/order');
+
 var app = express();
 app.use(cors());
 app.options('*', cors());
@@ -29,8 +31,9 @@ app.use(bodyParser.urlencoded( {extended: false}));
 //mongoose to use
 const mongoose = require('mongoose');
 const Menu = require('./models/menu');
+
 //connecting to the database
-/*mongoose.connect(
+/* mongoose.connect(
   "mongodb://localhost:27017/Taco_Loco",{ useNewUrlParser: true }
 )
 .then(() => {
@@ -38,7 +41,8 @@ const Menu = require('./models/menu');
 })
 .catch((err) => {
   console.log(err);
-});*/
+});
+*/
 
 //connecting to MongoAtlas DB
 //mongodb+srv://saiesaraf:<password>@cluster0-5czsu.mongodb.net/<dbname>?retryWrites=true&w=majority
@@ -46,12 +50,6 @@ mongoose.connect('mongodb+srv://saiesaraf:April@2020@cluster0-5czsu.mongodb.net/
     useNewUrlParser:true,
     useCreateIndex:true
 });
-
-
-//First endpoint- Take input from the user- menu name and quantity
-//Search in DB that name of menu and retrieve it's cost
-
-
 
 
 // view engine setup
@@ -67,7 +65,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/menuNew', menuRouter);
-
+app.use('/orderNew', orderRouter);
 
 app.listen(process.env.PORT || 5000)
 
